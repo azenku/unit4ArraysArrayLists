@@ -7,7 +7,7 @@
  */
 public class Radar
 {
-    
+
     // stores whether each cell triggered detection for the current scan of the radar
     // (true represents a detected monster, which may be a false positive)
     private boolean[][] currentScan;
@@ -34,7 +34,8 @@ public class Radar
     public Radar(int rows, int cols)
     {
         // initialize the currentScan 2D array and the accumulator 2D array
-        
+        currentScan = new boolean[rows][cols];
+        accumulator = new int[rows][cols];
         
         //
         // !!! add code here !!!
@@ -62,8 +63,30 @@ public class Radar
         //    3. inject noise into the grid
         //    4. update the accumulator 2D array based on the state of the currentScan 2D array
         //    5. increment the numScans instance variable
+        for(int i = 0; i< currentScan.length; i++)
+        {
+            for(int j = 0; j< currentScan[i].length; j++)
+            {
+                
+                currentScan[i][j] = false;
+            }
+        }
         
+        currentScan[monsterLocationRow][monsterLocationCol]= true;
+        injectNoise();
         
+        for(int i = 0; i< currentScan.length; i++)
+        {
+            for(int j = 0; j< currentScan[i].length; j++)
+            {
+                
+                if(currentScan[i][j] == true)
+                {
+                    accumulator[i][j]+=1;
+                }
+            }
+        }
+        numScans+=1;
         //
         // !!! add code here !!!
         //
@@ -166,7 +189,17 @@ public class Radar
         // detected as a false positive. Use the Math.random method to determine if each cell should be set
         // as a false positive.
         
-        
+        for( int i = 0;i < currentScan.length; i++)
+        {
+            for(int j = 0; j< currentScan[i].length; j++)
+            {
+                double number = Math.random();
+                if(number<= noiseFraction)
+                {
+                    currentScan[i][j] = true;
+                }
+            }
+        }
         //
         // !!! add code here !!!
         //
