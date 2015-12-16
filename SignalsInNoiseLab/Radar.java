@@ -1,4 +1,4 @@
-
+import java.util.Scanner;
 /**
  * The model for radar scan and accumulator
  * 
@@ -44,8 +44,9 @@ public class Radar
         
         // randomly set the location of the monster (can be explicity set through the
         //  setMonsterLocation method for the unit test
-        monsterLocationRow = (int)(Math.random() * rows);
-        monsterLocationCol = (int)(Math.random() * cols);
+        
+        //monsterLocationRow = (int)(Math.random() * rows);
+        //monsterLocationCol = (int)(Math.random() * cols);
         
         noiseFraction = 0.05;
         numScans= 0;
@@ -65,6 +66,7 @@ public class Radar
         //    5. increment the numScans instance variable
         for(int i = 0; i< currentScan.length; i++)
         {
+            
             for(int j = 0; j< currentScan[i].length; j++)
             {
                 
@@ -72,7 +74,7 @@ public class Radar
             }
         }
         
-        currentScan[monsterLocationRow][monsterLocationCol]= true;
+        setMonsterLocation(monsterLocationRow,monsterLocationCol);
         injectNoise();
         
         for(int i = 0; i< currentScan.length; i++)
