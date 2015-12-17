@@ -19,14 +19,27 @@ public class RadarViewer
         final int COLS = 100;
         Radar radar = new Radar(ROWS, COLS);
         radar.setNoiseFraction(0.10);
-        
-        System.out.println("Choose the monsters row: ");
+        int rows = radar.getNumRows();
+        int cols=radar.getNumCols();
+    int monsterLocationRow = 0;
+    int monsterLocationCol = 0;
         Scanner scan = new Scanner(System.in);
-        int monsterLocationRow = scan.nextInt();
+        System.out.println("do you want to Choose the monsters loc?: 1=yes 0=no");
+        int choice = scan.nextInt();
+        if( choice == 1)
+        {
+        System.out.println("Choose the monsters row: ");
+        monsterLocationRow = scan.nextInt();
         System.out.println("Choose the monsters column: ");
-        int monsterLocationCol = scan.nextInt();
-        
-        radar.setMonsterLocation(monsterLocationRow,monsterLocationCol);
+        monsterLocationCol = scan.nextInt();
+    }
+    else if(choice == 0)
+    {
+       monsterLocationRow = (int)(Math.random() * rows);
+       monsterLocationCol = (int)(Math.random() * cols);
+    }
+    
+    radar.setMonsterLocation(monsterLocationRow,monsterLocationCol);
         
         radar.scan();
         
